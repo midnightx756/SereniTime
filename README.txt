@@ -1,0 +1,1 @@
+This folder includes the dart code (written in flutter) for frontend of the project SereniTime.
