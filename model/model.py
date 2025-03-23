@@ -50,31 +50,44 @@ class ProblemModel(nn.Module):
         self.rnn = nn.GRU(input_size=100, hidden_size=128, num_layers=1, batch_first=True)
         self.fc = nn.Linear(128, len(vocab))
 
+    def forward(self, x):
+        embedded = self.embedding(x)
+        output, _ = self.rnn(embedded)
+        output = self.fc(output[:, -1, :])  # Take the output from the last time step
+        return output
+
+
 model = ProblemModel()
 optimizer = optim.Adam(model.parameters(), lr = 0.001)
 loss_fn = nn.CrossEntropyLoss()
 
 
 #Model Training
-for epoch in range(10):
-    for batch in data_loader:
-        problem_tensor, solution_tensor = batch 
-        optimizer.zero_grad()
-        output = model(problem_tensor)
-        loss = loss_fn(output, torch.arg,max(solution_tensor, dim=1))
-        loss.backward()
-        optimizer.step()
-        print(f'Epoch {epoch+1}, Loss: {loss.item()}')
+def train_model(model, data_loader, optimizer, loss_fn, epochs=10):
+    for epoch in range(10):
+        for batch in data_loader:
+            problem_tensor, solution_tensor = batch 
+            optimizer.zero_grad()
+            output = model(problem_tensor)
+            #flatten solution_tensor and calculate loss
+            loss = loss_fn(output, solution_tensor.view(-1))
+            loss.backward()
+            optimizer.step()
+            print(f'Epoch {epoch+1}, Loss: {loss.item()}')
 
 #Using model for interface
 def get_solution(problem):
     problem_tokens = word_tokenize(problem)
     problem_tensor = torch.tensor([vocab[token] for token in problem_tokens])
-    output = model(problem_tensor)
+    output = model(problem_tensor.unsqueeze(0)) # add batch dimension
     solution_index = torch.argmax(output)
     solution_token =vocab.itos[solution_index]
     return solution_token
 
 if __name__ == '__main__':
+
+    # Train the model before doing anything else
+    train_model(model, data_loader, optimizer, loss_fn)
+    
     problem = 'I am feeling sad'
     print(get_solution(problem))
