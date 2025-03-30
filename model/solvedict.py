@@ -40,8 +40,7 @@ def extract_data_from_word_files(file_list):
             print(f"Error processing file '{file_path}': {e}")
     return combined_data
 
-if __name__ == "__main__":
-    word_files = [
+word_files = [
         'Solutions_Table1.docx',
         'Solutions_Table2.docx',
         'Solutions_Table3.docx',
@@ -52,7 +51,7 @@ if __name__ == "__main__":
         'Solutions_table8.docx'
     ]  # Replace with the actual names of your files
 
-    all_data = extract_data_from_word_files(word_files)
+all_data = extract_data_from_word_files(word_files)
 
     # You can now print or further process the 'all_data' dictionary
     # For example, to see all the extracted data:
@@ -61,5 +60,5 @@ if __name__ == "__main__":
     #     for row in data:
     #         print(row)
     #     print("-" * 20)
-
-    print("Data from all Word files has been extracted into the 'all_data' dictionary.")
+if __name__=="__main__":
+     print("Data from all Word files has been extracted into the 'all_data' dictionary.")

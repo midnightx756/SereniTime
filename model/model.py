@@ -7,7 +7,8 @@ import torchtext
 from torchtext.vocab import GloVe
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-from pand import problems_df, solutions_df
+from pand import problems_df
+from solutionspd import solutions_df
 
 data_df = pd.concat([problems_df, solutions_df], axis=1)
 
