@@ -2,16 +2,6 @@ import docx
 import os
 
 def extract_data_from_word_files(file_list):
-    """
-    Extracts table data from a list of Word files and combines it into a single dictionary.
-
-    Args:
-        file_list (list): A list of paths to the Word (.docx) files.
-
-    Returns:
-        dict: A dictionary where keys are table headings (or default names)
-              and values are lists of lists representing the table data.
-    """
     combined_data = {}
     for file_path in file_list:
         try:
@@ -53,12 +43,6 @@ word_files = [
 
 all_data = extract_data_from_word_files(word_files)
 
-    # You can now print or further process the 'all_data' dictionary
-    # For example, to see all the extracted data:
-    # for heading, data in all_data.items():
-    #     print(f"Heading: {heading}")
-    #     for row in data:
-    #         print(row)
-    #     print("-" * 20)
 if __name__=="__main__":
+
      print("Data from all Word files has been extracted into the 'all_data' dictionary.")
