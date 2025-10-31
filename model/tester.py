@@ -2,7 +2,7 @@ import docx
 
 doc = docx.Document('databse.docx')
 
-#initialze an empty dictionary
+#initialzing an empty dictionary
 data = {}
 for table in doc.tables:
     heading = None
