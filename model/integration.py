@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
-from model import ProblemModel  # Import your model class from model.py
+from model import ProblemModel  # Importing our model class from model.py
 import torch
 
 app = Flask(__name__)
 
-# Load your model instance
-mi = ProblemModel()  # Initialize your model
+# Loading our model instance
+mi = ProblemModel()  # Initializing our model
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -13,7 +13,7 @@ def predict():
         data = request.get_json()
         user_prompt = data['prompt']
 
-        # Use your model's get_solution method
+        # Using our model's get_solution method
         solution = mi.get_solution(user_prompt)
 
         return jsonify({'solution': solution})
@@ -22,4 +22,5 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
+
     app.run(debug=True)
