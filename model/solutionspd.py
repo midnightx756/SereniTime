@@ -9,7 +9,3 @@ for key, value in all_data.items():
 
 print("Pandas DataFrames for solutions have been created in the 'solutions_df' dictionary.")
 
-# You can now work with the 'solutions_df' dictionary here
-# For example, print the DataFrame for a specific key:
-# if 'Your Table Heading' in solutions_df:
-#     print(solutions_df['Your Table Heading'])
