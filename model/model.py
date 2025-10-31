@@ -22,11 +22,11 @@ class ProblemDataset(Dataset):
         problem = self.data_df.iloc[index, 0]
         solution = self.data_df.iloc[index, 1]
         
-        # Preprocess the problem and solution
+        # Preprocessing the problem and solution
         problem_tokens = word_tokenize(problem)
         solution_tokens = word_tokenize(solution)
 
-        #Conver the tokens to numerical tensors
+        #Convering the tokens to numerical tensors
         problem_tensor = torch.tensor([self.vocab[token] for token in problem_tokens])
         solution_tensor = torch.tensor([self.vocab[token] for token in solution_tokens])
 
@@ -38,12 +38,12 @@ class ProblemDataset(Dataset):
 #Creating a vocabulary
 vocab = GloVe(name = '6B', dim=100)
 
-#Create a dataset Interface
+#Creating a dataset Interface
 dataset = ProblemDataset(data_df, vocab)
 
 data_loader = Dataloader(dataset, batch_size=32, shuffle=True)
 
-#
+
 class ProblemModel(nn.Module):
     def __init__(self):
         super(ProblemModel, self).__int__()
@@ -87,8 +87,9 @@ def get_solution(problem):
 
 if __name__ == '__main__':
 
-    # Train the model before doing anything else
+    # Training the model before doing anything else
     train_model(model, data_loader, optimizer, loss_fn)
     
     problem = 'I am feeling sad'
+
     print(get_solution(problem))
